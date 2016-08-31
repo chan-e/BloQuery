@@ -7,25 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		68529DBD823AADB4AD6F8D5B /* libPods-BloQuery.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C18D502E464EA7F5B97C3950 /* libPods-BloQuery.a */; };
 		889A9CEB1D6142040049052A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 889A9CEA1D6142040049052A /* main.m */; };
 		889A9CEE1D6142040049052A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 889A9CED1D6142040049052A /* AppDelegate.m */; };
-		889A9CF11D6142040049052A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 889A9CF01D6142040049052A /* ViewController.m */; };
 		889A9CF41D6142040049052A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 889A9CF21D6142040049052A /* Main.storyboard */; };
 		889A9CF61D6142040049052A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 889A9CF51D6142040049052A /* Assets.xcassets */; };
 		889A9CF91D6142040049052A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 889A9CF71D6142040049052A /* LaunchScreen.storyboard */; };
+		889A9D111D6FA9170049052A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 889A9D101D6FA9170049052A /* GoogleService-Info.plist */; };
+		889A9D141D6FB8840049052A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 889A9D131D6FB8840049052A /* LoginViewController.m */; };
+		889A9D171D7259D00049052A /* QuestionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 889A9D161D7259D00049052A /* QuestionsTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04A8EE3458863D17EB948594 /* Pods-BloQuery.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BloQuery.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BloQuery/Pods-BloQuery.debug.xcconfig"; sourceTree = "<group>"; };
+		4E446E679094E2F5DCB6E4EB /* Pods-BloQuery.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BloQuery.release.xcconfig"; path = "Pods/Target Support Files/Pods-BloQuery/Pods-BloQuery.release.xcconfig"; sourceTree = "<group>"; };
 		889A9CE61D6142040049052A /* BloQuery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BloQuery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		889A9CEA1D6142040049052A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		889A9CEC1D6142040049052A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		889A9CED1D6142040049052A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		889A9CEF1D6142040049052A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		889A9CF01D6142040049052A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		889A9CF31D6142040049052A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		889A9CF51D6142040049052A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		889A9CF81D6142040049052A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		889A9CFA1D6142040049052A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		889A9D101D6FA9170049052A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		889A9D121D6FB8840049052A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		889A9D131D6FB8840049052A /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		889A9D151D7259D00049052A /* QuestionsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionsTableViewController.h; sourceTree = "<group>"; };
+		889A9D161D7259D00049052A /* QuestionsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionsTableViewController.m; sourceTree = "<group>"; };
+		C18D502E464EA7F5B97C3950 /* libPods-BloQuery.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BloQuery.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +42,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68529DBD823AADB4AD6F8D5B /* libPods-BloQuery.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		02FD54481CE3E23D12E1E8B5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				04A8EE3458863D17EB948594 /* Pods-BloQuery.debug.xcconfig */,
+				4E446E679094E2F5DCB6E4EB /* Pods-BloQuery.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		184A0594E9291332C08277A7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C18D502E464EA7F5B97C3950 /* libPods-BloQuery.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		889A9CDD1D6142040049052A = {
 			isa = PBXGroup;
 			children = (
 				889A9CE81D6142040049052A /* BloQuery */,
 				889A9CE71D6142040049052A /* Products */,
+				02FD54481CE3E23D12E1E8B5 /* Pods */,
+				184A0594E9291332C08277A7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,10 +87,13 @@
 		889A9CE81D6142040049052A /* BloQuery */ = {
 			isa = PBXGroup;
 			children = (
+				889A9D101D6FA9170049052A /* GoogleService-Info.plist */,
 				889A9CEC1D6142040049052A /* AppDelegate.h */,
 				889A9CED1D6142040049052A /* AppDelegate.m */,
-				889A9CEF1D6142040049052A /* ViewController.h */,
-				889A9CF01D6142040049052A /* ViewController.m */,
+				889A9D121D6FB8840049052A /* LoginViewController.h */,
+				889A9D131D6FB8840049052A /* LoginViewController.m */,
+				889A9D151D7259D00049052A /* QuestionsTableViewController.h */,
+				889A9D161D7259D00049052A /* QuestionsTableViewController.m */,
 				889A9CF21D6142040049052A /* Main.storyboard */,
 				889A9CF51D6142040049052A /* Assets.xcassets */,
 				889A9CF71D6142040049052A /* LaunchScreen.storyboard */,
@@ -86,9 +118,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 889A9CFD1D6142040049052A /* Build configuration list for PBXNativeTarget "BloQuery" */;
 			buildPhases = (
+				E2A01D84DC1D1BE23DF231AC /* 📦 Check Pods Manifest.lock */,
 				889A9CE21D6142040049052A /* Sources */,
 				889A9CE31D6142040049052A /* Frameworks */,
 				889A9CE41D6142040049052A /* Resources */,
+				58B1B6799A306460A11F0D00 /* 📦 Embed Pods Frameworks */,
+				3EDF3124D2463E01D88C8274 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -138,6 +173,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				889A9CF91D6142040049052A /* LaunchScreen.storyboard in Resources */,
+				889A9D111D6FA9170049052A /* GoogleService-Info.plist in Resources */,
 				889A9CF61D6142040049052A /* Assets.xcassets in Resources */,
 				889A9CF41D6142040049052A /* Main.storyboard in Resources */,
 			);
@@ -145,12 +181,61 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3EDF3124D2463E01D88C8274 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BloQuery/Pods-BloQuery-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		58B1B6799A306460A11F0D00 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BloQuery/Pods-BloQuery-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E2A01D84DC1D1BE23DF231AC /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		889A9CE21D6142040049052A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				889A9CF11D6142040049052A /* ViewController.m in Sources */,
+				889A9D171D7259D00049052A /* QuestionsTableViewController.m in Sources */,
+				889A9D141D6FB8840049052A /* LoginViewController.m in Sources */,
 				889A9CEE1D6142040049052A /* AppDelegate.m in Sources */,
 				889A9CEB1D6142040049052A /* main.m in Sources */,
 			);
@@ -264,6 +349,7 @@
 		};
 		889A9CFE1D6142040049052A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 04A8EE3458863D17EB948594 /* Pods-BloQuery.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -276,6 +362,7 @@
 		};
 		889A9CFF1D6142040049052A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4E446E679094E2F5DCB6E4EB /* Pods-BloQuery.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -305,6 +392,7 @@
 				889A9CFF1D6142040049052A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
