@@ -9,10 +9,12 @@
 #import "LoginViewController.h"
 @import Firebase;
 
-@interface LoginViewController ()
+@interface LoginViewController () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapGestureRecognizer;
 
 @end
 
@@ -22,6 +24,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.emailTextField.delegate = self;
+    self.passwordTextField.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -43,6 +47,20 @@
     [alert addAction:okAction];
     
     [self presentViewController:alert animated:YES completion:nil];
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField == self.emailTextField) {
+        [textField resignFirstResponder];
+        [self.passwordTextField becomeFirstResponder];
+    } else if (textField == self.passwordTextField) {
+        [textField resignFirstResponder];
+        [self tapOnLoginButton:nil];
+    }
+    
+    return YES;
 }
 
 #pragma mark - IBActions
@@ -67,10 +85,12 @@
     [alert addTextFieldWithConfigurationHandler:^(UITextField * textField) {
         textField.placeholder = @"Email";
         textField.keyboardType = UIKeyboardTypeEmailAddress;
+        textField.returnKeyType = UIReturnKeyNext;
     }];
     
     [alert addTextFieldWithConfigurationHandler:^(UITextField * textField) {
         textField.placeholder = @"Password";
+        textField.returnKeyType = UIReturnKeyDone;
         textField.secureTextEntry = YES;
     }];
     
@@ -101,6 +121,10 @@
     [alert addAction:logInAction];
     
     [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (IBAction)dismissKeyboard:(UITapGestureRecognizer *)recognizer {
+    [self.view endEditing:YES];
 }
 
 #pragma mark - Unwind Segue

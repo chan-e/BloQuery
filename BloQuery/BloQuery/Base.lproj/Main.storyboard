@@ -30,7 +30,7 @@
                                     <constraint firstAttribute="width" constant="440" id="gXV-5b-Lpg"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="gXV-5b-Lpg"/>
@@ -40,7 +40,7 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="efG-kD-ahi">
                                 <rect key="frame" x="36" y="323" width="528" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DCJ-EA-wZw">
                                 <rect key="frame" x="36" y="439" width="528" height="30"/>
@@ -61,6 +61,7 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="DCJ-EA-wZw" firstAttribute="top" secondItem="JVl-jE-80B" secondAttribute="bottom" constant="16" id="24D-wg-ef8"/>
                             <constraint firstItem="efG-kD-ahi" firstAttribute="width" secondItem="Dbh-HX-Nr9" secondAttribute="width" id="3cs-LW-gJt"/>
@@ -78,14 +79,23 @@
                             <constraint firstItem="efG-kD-ahi" firstAttribute="top" secondItem="Dbh-HX-Nr9" secondAttribute="bottom" constant="8" id="wP2-21-CBR"/>
                             <constraint firstItem="DCJ-EA-wZw" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="wkq-ca-vZb"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="Atk-sT-q0R" appends="YES" id="cEk-rU-dNa"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="Dbh-HX-Nr9" id="8Kw-GA-YaO"/>
                         <outlet property="passwordTextField" destination="efG-kD-ahi" id="bnI-4U-pMp"/>
+                        <outlet property="tapGestureRecognizer" destination="Atk-sT-q0R" id="ska-O2-mUm"/>
                         <segue destination="NwE-cJ-hkv" kind="show" identifier="ShowQuestions" id="Fi6-eG-0RE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Atk-sT-q0R">
+                    <connections>
+                        <action selector="dismissKeyboard:" destination="BYZ-38-t0r" id="N8I-5R-GfI"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="282" y="531"/>
         </scene>
