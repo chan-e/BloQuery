@@ -128,6 +128,11 @@
                                 <segue destination="zC1-lG-BY7" kind="unwind" unwindAction="unwindToLoginVC:" id="R9E-pS-iwe"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="eNK-Q1-WgJ">
+                            <connections>
+                                <action selector="postQuestion:" destination="9ei-G5-Pzj" id="qvS-bc-bpn"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NHe-ZP-CP3" userLabel="First Responder" sceneMemberID="firstResponder"/>

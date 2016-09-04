@@ -7,6 +7,7 @@
 //
 
 #import "QuestionsTableViewController.h"
+@import SDCAlertView;
 
 @interface QuestionsTableViewController ()
 
@@ -82,6 +83,57 @@
     return YES;
 }
 */
+
+#pragma - IBActions
+
+- (IBAction)postQuestion:(id)sender {
+    UITextView *textView = [[UITextView alloc] init];
+    textView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    SDCAlertController* alertController = [[SDCAlertController alloc] initWithTitle:@"Query"
+                                                                            message:nil
+                                                                     preferredStyle:SDCAlertControllerStyleAlert];
+    
+    SDCAlertAction* cancelAction = [[SDCAlertAction alloc] initWithTitle:@"Cancel"
+                                                                   style:SDCAlertActionStyleDefault
+                                                                 handler:nil];
+    
+    SDCAlertAction* postAction = [[SDCAlertAction alloc] initWithTitle:@"Post"
+                                                                 style:SDCAlertActionStyleDefault
+                                                               handler:nil];
+    
+    [alertController addAction:cancelAction];
+    [alertController addAction:postAction];
+    
+    UIView* contentView = alertController.contentView;
+    
+    [contentView addSubview:textView];
+    
+    [textView.centerXAnchor constraintEqualToAnchor:contentView.centerXAnchor].active = YES;
+    [textView.topAnchor constraintEqualToAnchor:contentView.topAnchor].active = YES;
+    [textView.bottomAnchor constraintEqualToAnchor:contentView.bottomAnchor].active = YES;
+    
+    NSLayoutConstraint *textViewWidth = [NSLayoutConstraint constraintWithItem:textView
+                                                                     attribute:NSLayoutAttributeWidth
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:contentView
+                                                                     attribute:NSLayoutAttributeWidth
+                                                                    multiplier:1
+                                                                      constant:0];
+    
+    NSLayoutConstraint *textViewHeight = [NSLayoutConstraint constraintWithItem:textView
+                                                                      attribute:NSLayoutAttributeHeight
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:nil
+                                                                      attribute:NSLayoutAttributeNotAnAttribute
+                                                                     multiplier:0
+                                                                       constant:100];
+    
+    [contentView addConstraint:textViewWidth];
+    [contentView addConstraint:textViewHeight];
+    
+    [alertController presentAnimated:YES completion:nil];
+}
 
 /*
 #pragma mark - Navigation
