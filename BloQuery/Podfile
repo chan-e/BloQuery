@@ -8,6 +8,7 @@ target 'BloQuery' do
   # Pods for BloQuery
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
+  pod 'Firebase/Database'
   pod 'SDCAlertView', '~> 5.1'
 
 end

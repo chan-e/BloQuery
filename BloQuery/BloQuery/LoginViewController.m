@@ -11,6 +11,8 @@
 
 @interface LoginViewController () <UITextFieldDelegate>
 
+@property (strong, nonatomic) FIRDatabaseReference *databaseRef;
+
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 
@@ -23,6 +25,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.databaseRef = [[FIRDatabase database] reference];
     
     self.emailTextField.delegate = self;
     self.passwordTextField.delegate = self;
@@ -79,8 +83,13 @@
 
 - (IBAction)tapOnSignUpButton:(id)sender {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Sign Up"
-                                                                   message:@"Enter email and password"
+                                                                   message:@"Enter username, email, and password"
                                                             preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * textField) {
+        textField.placeholder = @"Username";
+        textField.returnKeyType = UIReturnKeyNext;
+    }];
     
     [alert addTextFieldWithConfigurationHandler:^(UITextField * textField) {
         textField.placeholder = @"Email";
@@ -102,8 +111,9 @@
     [UIAlertAction actionWithTitle:@"Log In"
                              style:UIAlertActionStyleDefault
                            handler:^(UIAlertAction * action) {
-                               UITextField *emailTextField = alert.textFields[0];
-                               UITextField *passwordTextField = alert.textFields[1];
+                               UITextField *usernameTextField = alert.textFields[0];
+                               UITextField *emailTextField = alert.textFields[1];
+                               UITextField *passwordTextField = alert.textFields[2];
                                
                                [[FIRAuth auth] createUserWithEmail:emailTextField.text
                                                           password:passwordTextField.text
@@ -113,7 +123,19 @@
                                                                 return;
                                                             }
                                                             
-                                                            [self performSegueWithIdentifier:@"ShowQuestions" sender:nil];
+                                                            FIRUserProfileChangeRequest *changeRequest = [[FIRAuth auth].currentUser profileChangeRequest];
+                                                            changeRequest.displayName = usernameTextField.text;
+                                                            
+                                                            [changeRequest commitChangesWithCompletion:^(NSError *error) {
+                                                                if (error) {
+                                                                    [self showMessagePrompt:error.localizedDescription];
+                                                                    return;
+                                                                }
+                                                                
+                                                                [[[self.databaseRef child:@"users"] child:user.uid] setValue:@{@"username": usernameTextField.text}];
+                                                                
+                                                                [self performSegueWithIdentifier:@"ShowQuestions" sender:nil];
+                                                            }];
                                                         }];
                            }];
     
