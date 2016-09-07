@@ -1,19 +1,19 @@
 //
-//  QuestionsTableViewController.m
+//  PostTableViewController.m
 //  BloQuery
 //
 //  Created by Eddy Chan on 8/27/16.
 //  Copyright © 2016 Eddy Chan. All rights reserved.
 //
 
-#import "QuestionsTableViewController.h"
+#import "PostTableViewController.h"
 @import SDCAlertView;
 
-@interface QuestionsTableViewController ()
+@interface PostTableViewController ()
 
 @end
 
-@implementation QuestionsTableViewController
+@implementation PostTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
