@@ -87,7 +87,7 @@
                         <outlet property="emailTextField" destination="Dbh-HX-Nr9" id="8Kw-GA-YaO"/>
                         <outlet property="passwordTextField" destination="efG-kD-ahi" id="bnI-4U-pMp"/>
                         <outlet property="tapGestureRecognizer" destination="Atk-sT-q0R" id="ska-O2-mUm"/>
-                        <segue destination="NwE-cJ-hkv" kind="show" identifier="ShowQuestions" id="Fi6-eG-0RE"/>
+                        <segue destination="QTY-fe-s4t" kind="show" identifier="ShowPosts" id="Fi6-eG-0RE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -138,12 +138,13 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NHe-ZP-CP3" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="zC1-lG-BY7" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1918" y="531"/>
+            <point key="canvasLocation" x="2730" y="531"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Recent-->
         <scene sceneID="GRX-M5-BR3">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NwE-cJ-hkv" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Recent" id="zQi-wl-BeZ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="XD2-Ge-f8M">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -155,6 +156,23 @@
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="niu-EO-icX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1918" y="531"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="Zf2-mv-kko">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="QTY-fe-s4t" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="XKd-c4-NGC">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="NwE-cJ-hkv" kind="relationship" relationship="viewControllers" id="FAk-ZV-SC2"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yhs-gG-FuZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1106" y="531"/>
         </scene>

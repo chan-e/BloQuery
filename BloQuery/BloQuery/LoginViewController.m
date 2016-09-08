@@ -77,7 +77,7 @@
                                  [self showMessagePrompt:error.localizedDescription];
                                  return;
                              }
-                             [self performSegueWithIdentifier:@"ShowQuestions" sender:nil];
+                             [self performSegueWithIdentifier:@"ShowPosts" sender:nil];
                          }];
 }
 
@@ -134,7 +134,7 @@
                                                                 
                                                                 [[[self.databaseRef child:@"users"] child:user.uid] setValue:@{@"username": usernameTextField.text}];
                                                                 
-                                                                [self performSegueWithIdentifier:@"ShowQuestions" sender:nil];
+                                                                [self performSegueWithIdentifier:@"ShowPosts" sender:nil];
                                                             }];
                                                         }];
                            }];
