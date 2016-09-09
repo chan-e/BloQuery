@@ -86,18 +86,18 @@
                                                                    message:@"Enter username, email, and password"
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
-    [alert addTextFieldWithConfigurationHandler:^(UITextField * textField) {
+    [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
         textField.placeholder = @"Username";
         textField.returnKeyType = UIReturnKeyNext;
     }];
     
-    [alert addTextFieldWithConfigurationHandler:^(UITextField * textField) {
+    [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
         textField.placeholder = @"Email";
         textField.keyboardType = UIKeyboardTypeEmailAddress;
         textField.returnKeyType = UIReturnKeyNext;
     }];
     
-    [alert addTextFieldWithConfigurationHandler:^(UITextField * textField) {
+    [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
         textField.placeholder = @"Password";
         textField.returnKeyType = UIReturnKeyDone;
         textField.secureTextEntry = YES;
@@ -110,7 +110,7 @@
     UIAlertAction *logInAction =
     [UIAlertAction actionWithTitle:@"Log In"
                              style:UIAlertActionStyleDefault
-                           handler:^(UIAlertAction * action) {
+                           handler:^(UIAlertAction *action) {
                                UITextField *usernameTextField = alert.textFields[0];
                                UITextField *emailTextField = alert.textFields[1];
                                UITextField *passwordTextField = alert.textFields[2];

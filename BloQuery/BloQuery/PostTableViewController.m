@@ -8,8 +8,11 @@
 
 #import "PostTableViewController.h"
 @import SDCAlertView;
+@import Firebase;
 
 @interface PostTableViewController ()
+
+@property (strong, nonatomic) FIRDatabaseReference *databaseRef;
 
 @end
 
@@ -17,6 +20,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.databaseRef = [[FIRDatabase database] reference];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -84,28 +89,37 @@
 }
 */
 
-#pragma - IBActions
+#pragma mark - IBActions
 
-- (IBAction)postQuestion:(id)sender {
+- (IBAction)addPost:(id)sender {
     UITextView *textView = [[UITextView alloc] init];
     textView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    SDCAlertController* alertController = [[SDCAlertController alloc] initWithTitle:@"Query"
+    SDCAlertController *alertController = [[SDCAlertController alloc] initWithTitle:@"Query"
                                                                             message:nil
                                                                      preferredStyle:SDCAlertControllerStyleAlert];
     
-    SDCAlertAction* cancelAction = [[SDCAlertAction alloc] initWithTitle:@"Cancel"
-                                                                   style:SDCAlertActionStyleDefault
+    SDCAlertAction *cancelAction = [[SDCAlertAction alloc] initWithTitle:@"Cancel"
+                                                                   style:SDCAlertActionStylePreferred
                                                                  handler:nil];
     
-    SDCAlertAction* postAction = [[SDCAlertAction alloc] initWithTitle:@"Post"
-                                                                 style:SDCAlertActionStyleDefault
-                                                               handler:nil];
+    SDCAlertAction *postAction =
+    [[SDCAlertAction alloc] initWithTitle:@"Post" style:SDCAlertActionStyleDefault handler:^(SDCAlertAction *action) {
+        NSString *userID = [FIRAuth auth].currentUser.uid;
+        
+        [[[self.databaseRef child:@"users"] child:userID] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
+            NSString *username = snapshot.value[@"username"];
+            
+            [self writeNewPost:userID username:username text:textView.text];
+        } withCancelBlock:^(NSError *error) {
+            NSLog(@"%@", error.localizedDescription);
+        }];
+    }];
     
     [alertController addAction:cancelAction];
     [alertController addAction:postAction];
     
-    UIView* contentView = alertController.contentView;
+    UIView *contentView = alertController.contentView;
     
     [contentView addSubview:textView];
     
@@ -133,6 +147,21 @@
     [contentView addConstraint:textViewHeight];
     
     [alertController presentAnimated:YES completion:nil];
+}
+
+- (void)writeNewPost:(NSString *)userID username:(NSString *)username text:(NSString *)text {
+    NSString *key = [[self.databaseRef child:@"posts"] childByAutoId].key;
+    
+    NSDictionary *post = @{@"uid": userID,
+                           @"author": username,
+                           @"text": text};
+    
+    NSDictionary *childUpdates = @{[@"/posts/" stringByAppendingString:key]: post,
+                                   [NSString stringWithFormat:@"/user-posts/%@/%@/", userID, key]: post};
+    
+    // Create new post at /posts/$postid
+    // and at /user-posts/$userid/$postid simultaneously
+    [self.databaseRef updateChildValues:childUpdates];
 }
 
 /*

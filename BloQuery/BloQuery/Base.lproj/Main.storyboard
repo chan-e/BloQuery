@@ -130,7 +130,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="eNK-Q1-WgJ">
                             <connections>
-                                <action selector="postQuestion:" destination="9ei-G5-Pzj" id="qvS-bc-bpn"/>
+                                <action selector="addPost:" destination="9ei-G5-Pzj" id="QFV-uF-oiH"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
