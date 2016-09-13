@@ -7,12 +7,15 @@
 //
 
 #import "PostTableViewController.h"
+#import "PostDataSource.h"
+#import "Post.h"
+#import "PostTableViewCell.h"
 @import SDCAlertView;
-@import Firebase;
+@import FirebaseDatabaseUI;
 
-@interface PostTableViewController ()
+@interface PostTableViewController () <UITableViewDelegate>
 
-@property (strong, nonatomic) FIRDatabaseReference *databaseRef;
+@property (strong, nonatomic) FirebaseTableViewDataSource *dataSource;
 
 @end
 
@@ -23,6 +26,24 @@
     
     self.databaseRef = [[FIRDatabase database] reference];
     
+    self.dataSource = [[PostDataSource alloc] initWithQuery:[self getQuery]
+                                                 modelClass:[Post class]
+                                   prototypeReuseIdentifier:@"postTableViewCell"
+                                                       view:self.tableView];
+    
+    [self.dataSource populateCellWithBlock:^(PostTableViewCell *cell, Post *post) {
+        //cell.userImageView.image = [UIImage imageNamed:@""];
+        cell.usernameLabel.text = post.username;
+        cell.postTextLabel.text = post.text;
+        cell.answerCountLabel.text = @"0 answers";
+     }];
+    
+    self.tableView.dataSource = self.dataSource;
+    self.tableView.delegate = self;
+    
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 132;
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -30,64 +51,22 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
+    
+    [self.tableView reloadData];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
+#pragma mark -
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+- (FIRDatabaseQuery *)getQuery {
+    return self.databaseRef;
 }
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
-}
-
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
-}
-*/
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - IBActions
 
@@ -153,7 +132,7 @@
     NSString *key = [[self.databaseRef child:@"posts"] childByAutoId].key;
     
     NSDictionary *post = @{@"uid": userID,
-                           @"author": username,
+                           @"username": username,
                            @"text": text};
     
     NSDictionary *childUpdates = @{[@"/posts/" stringByAppendingString:key]: post,

@@ -15,6 +15,10 @@
 		889A9D111D6FA9170049052A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 889A9D101D6FA9170049052A /* GoogleService-Info.plist */; };
 		889A9D141D6FB8840049052A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 889A9D131D6FB8840049052A /* LoginViewController.m */; };
 		889A9D171D7259D00049052A /* PostTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 889A9D161D7259D00049052A /* PostTableViewController.m */; };
+		889A9D211D8517490049052A /* PostDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 889A9D201D8517490049052A /* PostDataSource.m */; };
+		889A9D241D8644750049052A /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 889A9D231D8644750049052A /* Post.m */; };
+		889A9D271D864C9C0049052A /* RecentPostsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 889A9D261D864C9C0049052A /* RecentPostsViewController.m */; };
+		889A9D2A1D86742E0049052A /* PostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 889A9D291D86742E0049052A /* PostTableViewCell.m */; };
 		C7C08F32CB1A0A07A676DF4C /* Pods_BloQuery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17FD03A98D93372DBD86A7DC /* Pods_BloQuery.framework */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +39,14 @@
 		889A9D131D6FB8840049052A /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		889A9D151D7259D00049052A /* PostTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostTableViewController.h; sourceTree = "<group>"; };
 		889A9D161D7259D00049052A /* PostTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostTableViewController.m; sourceTree = "<group>"; };
+		889A9D1F1D8517490049052A /* PostDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostDataSource.h; sourceTree = "<group>"; };
+		889A9D201D8517490049052A /* PostDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostDataSource.m; sourceTree = "<group>"; };
+		889A9D221D8644750049052A /* Post.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
+		889A9D231D8644750049052A /* Post.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
+		889A9D251D864C9C0049052A /* RecentPostsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentPostsViewController.h; sourceTree = "<group>"; };
+		889A9D261D864C9C0049052A /* RecentPostsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentPostsViewController.m; sourceTree = "<group>"; };
+		889A9D281D86742E0049052A /* PostTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostTableViewCell.h; sourceTree = "<group>"; };
+		889A9D291D86742E0049052A /* PostTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +106,14 @@
 				889A9D131D6FB8840049052A /* LoginViewController.m */,
 				889A9D151D7259D00049052A /* PostTableViewController.h */,
 				889A9D161D7259D00049052A /* PostTableViewController.m */,
+				889A9D251D864C9C0049052A /* RecentPostsViewController.h */,
+				889A9D261D864C9C0049052A /* RecentPostsViewController.m */,
+				889A9D1F1D8517490049052A /* PostDataSource.h */,
+				889A9D201D8517490049052A /* PostDataSource.m */,
+				889A9D221D8644750049052A /* Post.h */,
+				889A9D231D8644750049052A /* Post.m */,
+				889A9D281D86742E0049052A /* PostTableViewCell.h */,
+				889A9D291D86742E0049052A /* PostTableViewCell.m */,
 				889A9CF21D6142040049052A /* Main.storyboard */,
 				889A9CF51D6142040049052A /* Assets.xcassets */,
 				889A9CF71D6142040049052A /* LaunchScreen.storyboard */,
@@ -235,9 +255,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				889A9D171D7259D00049052A /* PostTableViewController.m in Sources */,
+				889A9D241D8644750049052A /* Post.m in Sources */,
+				889A9D271D864C9C0049052A /* RecentPostsViewController.m in Sources */,
+				889A9D211D8517490049052A /* PostDataSource.m in Sources */,
 				889A9D141D6FB8840049052A /* LoginViewController.m in Sources */,
 				889A9CEE1D6142040049052A /* AppDelegate.m in Sources */,
 				889A9CEB1D6142040049052A /* main.m in Sources */,
+				889A9D2A1D86742E0049052A /* PostTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

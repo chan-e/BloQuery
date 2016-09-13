@@ -9,6 +9,7 @@ target 'BloQuery' do
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
+  pod 'FirebaseUI', '~> 0.4'
   pod 'SDCAlertView', '~> 5.1'
 
 end

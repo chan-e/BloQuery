@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+@import Firebase;
 
-@interface PostTableViewController : UITableViewController
+@interface PostTableViewController : UIViewController
+
+@property (strong, nonatomic) FIRDatabaseReference *databaseRef;
+
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end
