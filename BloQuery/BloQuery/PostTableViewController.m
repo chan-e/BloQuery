@@ -7,6 +7,7 @@
 //
 
 #import "PostTableViewController.h"
+#import "PostDetailTableViewController.h"
 #import "PostDataSource.h"
 #import "Post.h"
 #import "PostTableViewCell.h"
@@ -66,6 +67,12 @@
 
 - (FIRDatabaseQuery *)getQuery {
     return self.databaseRef;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self performSegueWithIdentifier:@"ShowPostDetail" sender:indexPath];
 }
 
 #pragma mark - IBActions
@@ -143,14 +150,20 @@
     [self.databaseRef updateChildValues:childUpdates];
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if ([segue.identifier isEqualToString:@"ShowPostDetail"]) {
+        PostDetailTableViewController *postDetailTableVC = segue.destinationViewController;
+        NSIndexPath *path = sender;
+        
+        FIRDataSnapshot *snapshot = [self.dataSource objectAtIndex:path.row];
+        postDetailTableVC.postKey = snapshot.key;
+    }
 }
-*/
 
 @end
