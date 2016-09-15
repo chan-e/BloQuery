@@ -284,6 +284,13 @@
                             <outlet property="delegate" destination="eWU-X7-iFJ" id="wHk-5o-tgj"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="Pb0-Bf-WAU">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="b7C-Iw-H2e">
+                            <connections>
+                                <action selector="addComment:" destination="eWU-X7-iFJ" id="Rca-jO-FLQ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bkg-3b-60u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

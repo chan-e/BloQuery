@@ -9,12 +9,15 @@
 #import "PostDetailTableViewController.h"
 #import "Post.h"
 #import "PostDetailTableViewCell.h"
+@import SDCAlertView;
 @import Firebase;
 
 @interface PostDetailTableViewController ()
 
 @property (strong, nonatomic) Post *post;
-@property (strong, nonatomic) FIRDatabaseReference *postRef;
+@property (strong, nonatomic) FIRDatabaseReference *ref;
+@property (strong, nonatomic) FIRDatabaseReference *postsRef;
+@property (strong, nonatomic) FIRDatabaseReference *commentsRef;
 @property (assign, nonatomic) FIRDatabaseHandle databaseHandle;
 
 @end
@@ -26,8 +29,9 @@
     
     self.post = [[Post alloc] init];
     
-    FIRDatabaseReference *ref = [[FIRDatabase database] reference];
-    self.postRef = [[ref child:@"posts"] child:self.postKey];
+    self.ref = [[FIRDatabase database] reference];
+    self.postsRef = [[self.ref child:@"posts"] child:self.postKey];
+    self.commentsRef = [[self.ref child:@"comments"] child:self.postKey];
     
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 88;
@@ -42,7 +46,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     
-    self.databaseHandle = [self.postRef observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
+    self.databaseHandle = [self.postsRef observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
         NSDictionary *postDict = snapshot.value;
         
         [self.post setValuesForKeysWithDictionary:postDict];
@@ -56,7 +60,7 @@
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:YES];
     
-    [self.postRef removeObserverWithHandle:self.databaseHandle];
+    [self.postsRef removeObserverWithHandle:self.databaseHandle];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -119,6 +123,69 @@
     return YES;
 }
 */
+
+#pragma mark - IBActions
+
+- (IBAction)addComment:(id)sender {
+    UITextView *textView = [[UITextView alloc] init];
+    textView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    SDCAlertController *alertController = [[SDCAlertController alloc] initWithTitle:@"Comment"
+                                                                            message:nil
+                                                                     preferredStyle:SDCAlertControllerStyleAlert];
+    
+    SDCAlertAction *cancelAction = [[SDCAlertAction alloc] initWithTitle:@"Cancel"
+                                                                   style:SDCAlertActionStylePreferred
+                                                                 handler:nil];
+    
+    SDCAlertAction *postAction =
+    [[SDCAlertAction alloc] initWithTitle:@"Post" style:SDCAlertActionStyleDefault handler:^(SDCAlertAction *action) {
+        NSString *userID = [FIRAuth auth].currentUser.uid;
+        
+        [[[self.ref child:@"users"] child:userID] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
+            NSString *username = snapshot.value[@"username"];
+            NSDictionary *comment = @{@"uid": userID,
+                                      @"username": username,
+                                      @"text": textView.text};
+            
+            [[self.commentsRef childByAutoId] setValue:comment];
+        } withCancelBlock:^(NSError *error) {
+            NSLog(@"%@", error.localizedDescription);
+        }];
+    }];
+    
+    [alertController addAction:cancelAction];
+    [alertController addAction:postAction];
+    
+    UIView *contentView = alertController.contentView;
+    
+    [contentView addSubview:textView];
+    
+    [textView.centerXAnchor constraintEqualToAnchor:contentView.centerXAnchor].active = YES;
+    [textView.topAnchor constraintEqualToAnchor:contentView.topAnchor].active = YES;
+    [textView.bottomAnchor constraintEqualToAnchor:contentView.bottomAnchor].active = YES;
+    
+    NSLayoutConstraint *textViewWidth = [NSLayoutConstraint constraintWithItem:textView
+                                                                     attribute:NSLayoutAttributeWidth
+                                                                     relatedBy:NSLayoutRelationEqual
+                                                                        toItem:contentView
+                                                                     attribute:NSLayoutAttributeWidth
+                                                                    multiplier:1
+                                                                      constant:0];
+    
+    NSLayoutConstraint *textViewHeight = [NSLayoutConstraint constraintWithItem:textView
+                                                                      attribute:NSLayoutAttributeHeight
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:nil
+                                                                      attribute:NSLayoutAttributeNotAnAttribute
+                                                                     multiplier:0
+                                                                       constant:100];
+    
+    [contentView addConstraint:textViewWidth];
+    [contentView addConstraint:textViewHeight];
+    
+    [alertController presentAnimated:YES completion:nil];
+}
 
 /*
 #pragma mark - Navigation
