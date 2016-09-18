@@ -9,12 +9,15 @@
 #import "PostDetailTableViewController.h"
 #import "Post.h"
 #import "PostDetailTableViewCell.h"
+#import "CommentTableViewCell.h"
 @import SDCAlertView;
 @import Firebase;
 
 @interface PostDetailTableViewController ()
 
 @property (strong, nonatomic) Post *post;
+@property (strong, nonatomic) NSMutableArray<FIRDataSnapshot *> *comments;
+
 @property (strong, nonatomic) FIRDatabaseReference *ref;
 @property (strong, nonatomic) FIRDatabaseReference *postsRef;
 @property (strong, nonatomic) FIRDatabaseReference *commentsRef;
@@ -28,13 +31,14 @@
     [super viewDidLoad];
     
     self.post = [[Post alloc] init];
+    self.comments = [[NSMutableArray alloc] init];
     
     self.ref = [[FIRDatabase database] reference];
     self.postsRef = [[self.ref child:@"posts"] child:self.postKey];
     self.commentsRef = [[self.ref child:@"comments"] child:self.postKey];
     
     self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedRowHeight = 88;
+    self.tableView.estimatedRowHeight = 132;
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -46,7 +50,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     
-    self.databaseHandle = [self.postsRef observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
+    [self.postsRef observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
         NSDictionary *postDict = snapshot.value;
         
         [self.post setValuesForKeysWithDictionary:postDict];
@@ -55,12 +59,23 @@
         
         self.navigationItem.title = [NSString stringWithFormat:@"%@ asks...", self.post.username];
     }];
+    
+    // Listen for new comments
+    self.databaseHandle = [self.commentsRef observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot *snapshot) {
+        [self.comments addObject:snapshot];
+        
+        NSIndexPath* lastRow = [NSIndexPath indexPathForRow:[self.comments count] - 1
+                                                  inSection:1];
+        
+        [self.tableView insertRowsAtIndexPaths:@[lastRow]
+                              withRowAnimation:UITableViewRowAnimationAutomatic];
+    }];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:YES];
     
-    [self.postsRef removeObserverWithHandle:self.databaseHandle];
+    [self.commentsRef removeObserverWithHandle:self.databaseHandle];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -71,23 +86,46 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    if (section == 0) {
+        // The post or question section
+        return 1;
+    } else {
+        // The comment or answer section
+        return [self.comments count];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"postDetailTableViewCell" forIndexPath:indexPath];
-    
-    // Configure the cell...
-    PostDetailTableViewCell *postCell = (PostDetailTableViewCell *)cell;
-    
-    //postCell.userImageView.image = [UIImage imageNamed:@""];
-    postCell.postTextLabel.text = self.post.text;
-    
-    return cell;
+    if (indexPath.section == 0) {
+        // The post or question section
+        PostDetailTableViewCell *postCell = (PostDetailTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"postDetailTableViewCell" forIndexPath:indexPath];
+        
+        // Configure the post cell...
+//        postCell.userImageView.image = [UIImage imageNamed:@""];
+        postCell.postTextLabel.text = self.post.text;
+        
+        return postCell;
+    } else {
+        // The comment or answer section
+        CommentTableViewCell *commentCell = (CommentTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"commentTableViewCell" forIndexPath:indexPath];
+        
+        FIRDataSnapshot *snapshot = self.comments[indexPath.row];
+        
+        NSDictionary *comment = snapshot.value;
+        
+        // Configure the comment cell...
+//        commentCell.userImageView.image = [UIImage imageNamed:@""];
+//        commentCell.upvoteImageView.image = [UIImage imageNamed:@""];
+        
+        commentCell.commentTextLabel.text = comment[@"text"];
+        commentCell.voteCountLabel.text = @"0 votes";
+        
+        return commentCell;
+    }
 }
 
 /*

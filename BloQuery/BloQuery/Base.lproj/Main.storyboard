@@ -119,10 +119,10 @@
             </objects>
             <point key="canvasLocation" x="1918" y="531"/>
         </scene>
-        <!--Recent Posts View Controller-->
+        <!--Recent Posts Table View Controller-->
         <scene sceneID="JKy-YK-4Hd">
             <objects>
-                <viewController id="k7w-jD-aTB" customClass="RecentPostsViewController" sceneMemberID="viewController">
+                <viewController id="k7w-jD-aTB" customClass="RecentPostsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="gHe-7c-e4Z">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -276,6 +276,67 @@
                                 <connections>
                                     <outlet property="postTextLabel" destination="s6w-8d-tdM" id="BTn-MC-IBj"/>
                                     <outlet property="userImageView" destination="JLX-8Y-wlc" id="Pxf-Xl-wLO"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="commentTableViewCell" rowHeight="132" id="rnd-6z-gm3" customClass="CommentTableViewCell">
+                                <rect key="frame" x="0.0" y="180" width="600" height="132"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rnd-6z-gm3" id="usa-Pm-3wI">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="131.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="U4E-f4-fVS">
+                                            <rect key="frame" x="8" y="79" width="44" height="44"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="44" id="DUT-dL-h4B"/>
+                                                <constraint firstAttribute="width" constant="44" id="LjW-ns-GeF"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vote count" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qbj-Jp-54L">
+                                            <rect key="frame" x="68" y="90" width="83" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0e9-WX-MN2">
+                                            <rect key="frame" x="548" y="79" width="44" height="44"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="44" id="092-uF-dMF"/>
+                                                <constraint firstAttribute="width" constant="44" id="rJT-RR-wHM"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comment" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8zi-zJ-z5p">
+                                            <rect key="frame" x="8" y="8" width="584" height="55"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="U4E-f4-fVS" firstAttribute="leading" secondItem="usa-Pm-3wI" secondAttribute="leadingMargin" id="2L5-ad-CAr"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="0e9-WX-MN2" secondAttribute="bottom" id="2QB-TU-8XD"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="8zi-zJ-z5p" secondAttribute="trailing" id="4iD-rm-lTz"/>
+                                        <constraint firstItem="qbj-Jp-54L" firstAttribute="leading" secondItem="U4E-f4-fVS" secondAttribute="trailing" constant="16" id="9Xc-lY-X0S"/>
+                                        <constraint firstItem="8zi-zJ-z5p" firstAttribute="leading" secondItem="usa-Pm-3wI" secondAttribute="leadingMargin" id="Oqv-Ut-JRw"/>
+                                        <constraint firstItem="qbj-Jp-54L" firstAttribute="centerY" secondItem="U4E-f4-fVS" secondAttribute="centerY" id="Srn-0w-YF6"/>
+                                        <constraint firstItem="0e9-WX-MN2" firstAttribute="trailing" secondItem="usa-Pm-3wI" secondAttribute="trailingMargin" id="gZj-7g-bXR"/>
+                                        <constraint firstItem="U4E-f4-fVS" firstAttribute="top" secondItem="usa-Pm-3wI" secondAttribute="topMargin" constant="16" id="hLS-Zj-Qs9"/>
+                                        <constraint firstItem="U4E-f4-fVS" firstAttribute="top" secondItem="8zi-zJ-z5p" secondAttribute="bottom" constant="16" id="mda-x1-RVm"/>
+                                        <constraint firstItem="8zi-zJ-z5p" firstAttribute="top" secondItem="usa-Pm-3wI" secondAttribute="topMargin" id="skl-PR-bsb"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="U4E-f4-fVS" secondAttribute="bottom" id="td8-k0-OXU"/>
+                                        <constraint firstItem="0e9-WX-MN2" firstAttribute="top" secondItem="8zi-zJ-z5p" secondAttribute="bottom" constant="16" id="xlA-Wx-PD4"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="hLS-Zj-Qs9"/>
+                                        </mask>
+                                    </variation>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="commentTextLabel" destination="8zi-zJ-z5p" id="Boi-n8-HAO"/>
+                                    <outlet property="upvoteImageView" destination="0e9-WX-MN2" id="aoR-FV-LHf"/>
+                                    <outlet property="userImageView" destination="U4E-f4-fVS" id="pe9-6d-R2O"/>
+                                    <outlet property="voteCountLabel" destination="qbj-Jp-54L" id="FSE-7b-j9o"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
