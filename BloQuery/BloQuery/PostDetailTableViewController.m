@@ -38,7 +38,7 @@
     self.commentsRef = [[self.ref child:@"comments"] child:self.postKey];
     
     self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedRowHeight = 132;
+    self.tableView.estimatedRowHeight = 176;
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -121,6 +121,7 @@
 //        commentCell.userImageView.image = [UIImage imageNamed:@""];
 //        commentCell.upvoteImageView.image = [UIImage imageNamed:@""];
         
+        commentCell.usernameLabel.text = comment[@"username"];
         commentCell.commentTextLabel.text = comment[@"text"];
         commentCell.voteCountLabel.text = @"0 votes";
         

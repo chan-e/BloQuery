@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *userImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *upvoteImageView;
 
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *commentTextLabel;
 @property (weak, nonatomic) IBOutlet UILabel *voteCountLabel;
 
