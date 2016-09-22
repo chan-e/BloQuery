@@ -13,9 +13,11 @@
 @property(strong, nonatomic) NSString *uid;
 @property(strong, nonatomic) NSString *username;
 @property(strong, nonatomic) NSString *text;
+@property(strong, nonatomic) NSNumber *commentCount;
 
 - (instancetype)initWithUid:(NSString *)uid
                 andUsername:(NSString *)username
-                    andText:(NSString *)text;
+                    andText:(NSString *)text
+            andCommentCount:(NSNumber *)commentCount;
 
 @end

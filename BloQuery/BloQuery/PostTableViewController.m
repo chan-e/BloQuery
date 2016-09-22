@@ -36,7 +36,7 @@
         //cell.userImageView.image = [UIImage imageNamed:@""];
         cell.usernameLabel.text = post.username;
         cell.postTextLabel.text = post.text;
-        cell.answerCountLabel.text = @"0 answers";
+        cell.commentCountLabel.text = [post.commentCount.stringValue stringByAppendingString:@" comments"];
      }];
     
     self.tableView.dataSource = self.dataSource;
@@ -140,7 +140,8 @@
     
     NSDictionary *post = @{@"uid": userID,
                            @"username": username,
-                           @"text": text};
+                           @"text": text,
+                           @"commentCount": @0};
     
     NSDictionary *childUpdates = @{[@"/posts/" stringByAppendingString:key]: post,
                                    [NSString stringWithFormat:@"/user-posts/%@/%@/", userID, key]: post};

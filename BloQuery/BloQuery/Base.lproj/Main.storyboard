@@ -163,8 +163,8 @@
                                                 </mask>
                                             </variation>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Answer count" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ghw-YW-Vsr">
-                                            <rect key="frame" x="8" y="44.5" width="105" height="19"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comment count" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ghw-YW-Vsr">
+                                            <rect key="frame" x="8" y="44.5" width="123" height="19"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="19" id="SFM-Ib-i1L"/>
                                             </constraints>
@@ -200,7 +200,7 @@
                                     </variation>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="answerCountLabel" destination="Ghw-YW-Vsr" id="52d-iJ-RE4"/>
+                                    <outlet property="commentCountLabel" destination="Ghw-YW-Vsr" id="EXK-NA-3eQ"/>
                                     <outlet property="postTextLabel" destination="pgF-oa-aVC" id="fD2-Uj-a3j"/>
                                     <outlet property="userImageView" destination="GWn-ZU-7mg" id="9sU-uw-vp5"/>
                                     <outlet property="usernameLabel" destination="v1m-5u-rjK" id="F1y-2v-Hpf"/>

@@ -178,6 +178,7 @@
     
     SDCAlertAction *postAction =
     [[SDCAlertAction alloc] initWithTitle:@"Post" style:SDCAlertActionStyleDefault handler:^(SDCAlertAction *action) {
+        // This ID belongs to the post commenter
         NSString *userID = [FIRAuth auth].currentUser.uid;
         
         [[[self.ref child:@"users"] child:userID] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
@@ -189,6 +190,20 @@
             [[self.commentsRef childByAutoId] setValue:comment];
         } withCancelBlock:^(NSError *error) {
             NSLog(@"%@", error.localizedDescription);
+        }];
+        
+        // After posting a comment to a post, increment its comment count
+        // at /posts/$postKey and at /user-posts/$uid/$postKey
+        
+        [self incrementCommentCountForRef:self.postsRef];
+        
+        [self.postsRef observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
+            // This ID belongs to the post owner
+            NSString *uid = snapshot.value[@"uid"];
+            
+            FIRDatabaseReference *userPostsRef = [[[self.ref child:@"user-posts"] child:uid] child:self.postKey];
+            
+            [self incrementCommentCountForRef:userPostsRef];
         }];
     }];
     
@@ -223,6 +238,32 @@
     [contentView addConstraint:textViewHeight];
     
     [alertController presentAnimated:YES completion:nil];
+}
+
+#pragma mark -
+
+- (void)incrementCommentCountForRef:(FIRDatabaseReference *)ref {
+    [ref runTransactionBlock:^FIRTransactionResult *(FIRMutableData *currentData) {
+        NSMutableDictionary *post = currentData.value;
+        
+        if (!post || [post isEqual:[NSNull null]]) {
+            return [FIRTransactionResult successWithValue:currentData];
+        }
+        
+        int commentCount = [post[@"commentCount"] intValue];
+        
+        commentCount++;
+        
+        post[@"commentCount"] = [NSNumber numberWithInt:commentCount];
+        
+        [currentData setValue:post];
+        
+        return [FIRTransactionResult successWithValue:currentData];
+    } andCompletionBlock:^(NSError *error, BOOL committed, FIRDataSnapshot *snapshot) {
+        if (error) {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
 }
 
 /*
