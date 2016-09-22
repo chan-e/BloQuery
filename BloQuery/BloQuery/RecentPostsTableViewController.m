@@ -1,18 +1,18 @@
 //
-//  RecentPostsViewController.m
+//  RecentPostsTableViewController.m
 //  BloQuery
 //
 //  Created by Eddy Chan on 9/11/16.
 //  Copyright © 2016 Eddy Chan. All rights reserved.
 //
 
-#import "RecentPostsViewController.h"
+#import "RecentPostsTableViewController.h"
 
-@interface RecentPostsViewController ()
+@interface RecentPostsTableViewController ()
 
 @end
 
-@implementation RecentPostsViewController
+@implementation RecentPostsTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

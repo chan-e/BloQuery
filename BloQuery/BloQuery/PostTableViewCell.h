@@ -14,6 +14,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *postTextLabel;
-@property (weak, nonatomic) IBOutlet UILabel *answerCountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *commentCountLabel;
 
 @end

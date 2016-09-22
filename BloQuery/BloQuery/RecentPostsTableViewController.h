@@ -1,5 +1,5 @@
 //
-//  RecentPostsViewController.h
+//  RecentPostsTableViewController.h
 //  BloQuery
 //
 //  Created by Eddy Chan on 9/11/16.
@@ -8,6 +8,6 @@
 
 #import "PostTableViewController.h"
 
-@interface RecentPostsViewController : PostTableViewController
+@interface RecentPostsTableViewController : PostTableViewController
 
 @end
