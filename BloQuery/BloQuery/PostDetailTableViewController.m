@@ -21,7 +21,7 @@
 @property (strong, nonatomic) FIRDatabaseReference *ref;
 @property (strong, nonatomic) FIRDatabaseReference *postsRef;
 @property (strong, nonatomic) FIRDatabaseReference *commentsRef;
-@property (assign, nonatomic) FIRDatabaseHandle databaseHandle;
+@property (strong, nonatomic) FIRDatabaseQuery *queryOrderedByVoteCount;
 
 @end
 
@@ -36,6 +36,8 @@
     self.ref = [[FIRDatabase database] reference];
     self.postsRef = [[self.ref child:@"posts"] child:self.postKey];
     self.commentsRef = [[self.ref child:@"comments"] child:self.postKey];
+    
+    self.queryOrderedByVoteCount = [self.commentsRef queryOrderedByChild:@"voteCount"];
     
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 176;
@@ -60,22 +62,23 @@
         self.navigationItem.title = [NSString stringWithFormat:@"%@ asks...", self.post.username];
     }];
     
-    // Listen for new comments
-    self.databaseHandle = [self.commentsRef observeEventType:FIRDataEventTypeChildAdded withBlock:^(FIRDataSnapshot *snapshot) {
-        [self.comments addObject:snapshot];
+    // Listen for changes in comments
+    [self.queryOrderedByVoteCount observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
+        [self.comments removeAllObjects];
         
-        NSIndexPath* lastRow = [NSIndexPath indexPathForRow:[self.comments count] - 1
-                                                  inSection:1];
+        // Firebase returns the query ordered by vote count in ascending order
+        for (FIRDataSnapshot *child in snapshot.children) {
+            [self.comments insertObject:child atIndex:0];
+        }
         
-        [self.tableView insertRowsAtIndexPaths:@[lastRow]
-                              withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableView reloadData];
     }];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:YES];
     
-    [self.commentsRef removeObserverWithHandle:self.databaseHandle];
+    [self.queryOrderedByVoteCount removeAllObservers];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -119,11 +122,17 @@
         
         // Configure the comment cell...
 //        commentCell.userImageView.image = [UIImage imageNamed:@""];
-//        commentCell.upvoteImageView.image = [UIImage imageNamed:@""];
         
         commentCell.usernameLabel.text = comment[@"username"];
         commentCell.commentTextLabel.text = comment[@"text"];
-        commentCell.voteCountLabel.text = @"0 votes";
+        commentCell.voteCountLabel.text = [[comment[@"voteCount"] stringValue] stringByAppendingString:@" votes"];
+        
+        NSString *uid = [FIRAuth auth].currentUser.uid;
+        
+        NSString *imageName = [comment[@"votes"] objectForKey:uid] ? @"777-thumbs-up-toolbar-selected" : @"777-thumbs-up-toolbar";
+        [commentCell.upvoteButton setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+        
+        commentCell.commentRef = snapshot.ref;
         
         return commentCell;
     }
@@ -186,7 +195,8 @@
             NSString *username = snapshot.value[@"username"];
             NSDictionary *comment = @{@"uid": userID,
                                       @"username": username,
-                                      @"text": textView.text};
+                                      @"text": textView.text,
+                                      @"voteCount": @0};
             
             [[self.commentsRef childByAutoId] setValue:comment];
         } withCancelBlock:^(NSError *error) {
