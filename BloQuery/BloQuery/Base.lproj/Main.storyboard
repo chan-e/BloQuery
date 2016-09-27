@@ -309,13 +309,6 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="777-thumbs-up-toolbar" translatesAutoresizingMaskIntoConstraints="NO" id="0e9-WX-MN2">
-                                            <rect key="frame" x="178" y="96" width="20" height="22"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="22" id="092-uF-dMF"/>
-                                                <constraint firstAttribute="width" constant="20" id="rJT-RR-wHM"/>
-                                            </constraints>
-                                        </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0wD-sm-6gB">
                                             <rect key="frame" x="8" y="145" width="79" height="22"/>
                                             <constraints>
@@ -325,43 +318,44 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uKv-Ho-ImT">
+                                            <rect key="frame" x="178" y="96" width="20" height="22"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="22" id="FhO-bH-IaH"/>
+                                                <constraint firstAttribute="width" constant="20" id="Nba-PW-9yU"/>
+                                            </constraints>
+                                            <state key="normal" image="777-thumbs-up-toolbar"/>
+                                            <connections>
+                                                <action selector="upvoteComment:" destination="rnd-6z-gm3" eventType="touchUpInside" id="F5T-gP-jsX"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="0e9-WX-MN2" firstAttribute="bottom" secondItem="qbj-Jp-54L" secondAttribute="bottom" id="28A-aR-VjK"/>
                                         <constraint firstItem="U4E-f4-fVS" firstAttribute="leading" secondItem="usa-Pm-3wI" secondAttribute="leadingMargin" id="2L5-ad-CAr"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="0e9-WX-MN2" secondAttribute="bottom" id="2QB-TU-8XD"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="8zi-zJ-z5p" secondAttribute="trailing" id="4iD-rm-lTz"/>
-                                        <constraint firstItem="0e9-WX-MN2" firstAttribute="baseline" secondItem="qbj-Jp-54L" secondAttribute="baseline" id="5l5-Gy-Eyf"/>
-                                        <constraint firstItem="0e9-WX-MN2" firstAttribute="leading" secondItem="qbj-Jp-54L" secondAttribute="trailing" constant="16" id="7uT-NJ-pvI"/>
                                         <constraint firstItem="qbj-Jp-54L" firstAttribute="leading" secondItem="U4E-f4-fVS" secondAttribute="trailing" constant="16" id="9Xc-lY-X0S"/>
-                                        <constraint firstItem="0e9-WX-MN2" firstAttribute="centerY" secondItem="qbj-Jp-54L" secondAttribute="centerY" id="DUd-Fp-tbr"/>
                                         <constraint firstItem="8zi-zJ-z5p" firstAttribute="leading" secondItem="usa-Pm-3wI" secondAttribute="leadingMargin" id="Oqv-Ut-JRw"/>
                                         <constraint firstItem="qbj-Jp-54L" firstAttribute="centerY" secondItem="U4E-f4-fVS" secondAttribute="centerY" id="Srn-0w-YF6"/>
                                         <constraint firstItem="0wD-sm-6gB" firstAttribute="leading" secondItem="usa-Pm-3wI" secondAttribute="leadingMargin" id="aD1-vX-EGO"/>
-                                        <constraint firstItem="0e9-WX-MN2" firstAttribute="trailing" secondItem="usa-Pm-3wI" secondAttribute="trailingMargin" id="gZj-7g-bXR"/>
+                                        <constraint firstItem="uKv-Ho-ImT" firstAttribute="bottom" secondItem="qbj-Jp-54L" secondAttribute="bottom" id="g06-1n-2gZ"/>
                                         <constraint firstItem="U4E-f4-fVS" firstAttribute="top" secondItem="usa-Pm-3wI" secondAttribute="topMargin" constant="16" id="hLS-Zj-Qs9"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="0wD-sm-6gB" secondAttribute="bottom" id="kHH-1o-93u"/>
                                         <constraint firstItem="0wD-sm-6gB" firstAttribute="top" secondItem="U4E-f4-fVS" secondAttribute="bottom" constant="16" id="mMU-Ts-fFJ"/>
                                         <constraint firstItem="U4E-f4-fVS" firstAttribute="top" secondItem="8zi-zJ-z5p" secondAttribute="bottom" constant="16" id="mda-x1-RVm"/>
                                         <constraint firstItem="8zi-zJ-z5p" firstAttribute="top" secondItem="usa-Pm-3wI" secondAttribute="topMargin" id="skl-PR-bsb"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="U4E-f4-fVS" secondAttribute="bottom" id="td8-k0-OXU"/>
-                                        <constraint firstItem="0e9-WX-MN2" firstAttribute="top" relation="greaterThanOrEqual" secondItem="8zi-zJ-z5p" secondAttribute="bottom" constant="16" id="xlA-Wx-PD4"/>
+                                        <constraint firstItem="uKv-Ho-ImT" firstAttribute="leading" secondItem="qbj-Jp-54L" secondAttribute="trailing" constant="16" id="xH9-Mo-Lbj"/>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
                                             <exclude reference="hLS-Zj-Qs9"/>
                                             <exclude reference="td8-k0-OXU"/>
-                                            <exclude reference="2QB-TU-8XD"/>
-                                            <exclude reference="5l5-Gy-Eyf"/>
-                                            <exclude reference="DUd-Fp-tbr"/>
-                                            <exclude reference="gZj-7g-bXR"/>
-                                            <exclude reference="xlA-Wx-PD4"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="commentTextLabel" destination="8zi-zJ-z5p" id="Boi-n8-HAO"/>
-                                    <outlet property="upvoteImageView" destination="0e9-WX-MN2" id="aoR-FV-LHf"/>
+                                    <outlet property="upvoteButton" destination="uKv-Ho-ImT" id="wgx-7b-TDM"/>
                                     <outlet property="userImageView" destination="U4E-f4-fVS" id="pe9-6d-R2O"/>
                                     <outlet property="usernameLabel" destination="0wD-sm-6gB" id="RCt-QN-Kzx"/>
                                     <outlet property="voteCountLabel" destination="qbj-Jp-54L" id="FSE-7b-j9o"/>
