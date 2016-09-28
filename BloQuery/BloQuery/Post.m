@@ -11,13 +11,14 @@
 @implementation Post
 
 - (instancetype)init {
-    return [self initWithUid:@"" andUsername:@"" andText:@"" andCommentCount:@0];
+    return [self initWithUid:@"" andUsername:@"" andText:@"" andCommentCount:@0 andCreatedDate:@0];
 }
 
 - (instancetype)initWithUid:(NSString *)uid
                 andUsername:(NSString *)username
                     andText:(NSString *)text
-            andCommentCount:(NSNumber *)commentCount {
+            andCommentCount:(NSNumber *)commentCount
+             andCreatedDate:(NSNumber *)createdDate {
     
     self = [super init];
     
@@ -26,6 +27,7 @@
         self.username = username;
         self.text = text;
         self.commentCount = commentCount;
+        self.createdDate = createdDate;
     }
     
     return self;

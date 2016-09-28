@@ -25,7 +25,7 @@
 }
 
 - (FIRDatabaseQuery *)getQuery {
-    FIRDatabaseQuery *recentPostsQuery = [[self.databaseRef child:@"posts"] queryLimitedToLast:25];
+    FIRDatabaseQuery *recentPostsQuery = [[[self.databaseRef child:@"posts"] queryLimitedToLast:25] queryOrderedByChild:@"createdDate"];
     
     return recentPostsQuery;
 }

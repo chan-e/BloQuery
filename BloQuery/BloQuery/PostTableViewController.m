@@ -138,10 +138,17 @@
 - (void)writeNewPost:(NSString *)userID username:(NSString *)username text:(NSString *)text {
     NSString *key = [[self.databaseRef child:@"posts"] childByAutoId].key;
     
+    // By creating a negative created date
+    // and Firebase returning sorted posts in ascending order,
+    // the most recently created one will be at the top of the table view.
+    NSTimeInterval timeInterval = [NSDate date].timeIntervalSince1970;
+    NSNumber *createdDate = [NSNumber numberWithDouble:-timeInterval];
+    
     NSDictionary *post = @{@"uid": userID,
                            @"username": username,
                            @"text": text,
-                           @"commentCount": @0};
+                           @"commentCount": @0,
+                           @"createdDate": createdDate};
     
     NSDictionary *childUpdates = @{[@"/posts/" stringByAppendingString:key]: post,
                                    [NSString stringWithFormat:@"/user-posts/%@/%@/", userID, key]: post};
