@@ -8,11 +8,14 @@
 
 #import "PostTableViewController.h"
 #import "PostDetailTableViewController.h"
+#import "ProfileViewController.h"
 #import "PostDataSource.h"
 #import "Post.h"
 #import "PostTableViewCell.h"
+
 @import SDCAlertView;
 @import FirebaseDatabaseUI;
+#import "UIImageView+AFNetworking.h"
 
 @interface PostTableViewController () <UITableViewDelegate>
 
@@ -33,10 +36,28 @@
                                                        view:self.tableView];
     
     [self.dataSource populateCellWithBlock:^(PostTableViewCell *cell, Post *post) {
-        //cell.userImageView.image = [UIImage imageNamed:@""];
         cell.usernameLabel.text = post.username;
         cell.postTextLabel.text = post.text;
         cell.commentCountLabel.text = [post.commentCount.stringValue stringByAppendingString:@" comments"];
+        
+        // Make the image view tappable
+        cell.userImageView.userInteractionEnabled = YES;
+        
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewTapped:)];
+        [cell.userImageView addGestureRecognizer:tapGestureRecognizer];
+        
+        
+        FIRDatabaseReference *usersRef = [[self.databaseRef child:@"users"] child:post.uid];
+        
+        [usersRef observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
+            NSString *profileImageURL = snapshot.value[@"profileImageURL"];
+            
+            if (profileImageURL.length) {
+                // Download the profile image
+                NSURL *url = [NSURL URLWithString:profileImageURL];
+                [cell.userImageView setImageWithURL:url];
+            }
+        }];
      }];
     
     self.tableView.dataSource = self.dataSource;
@@ -73,6 +94,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self performSegueWithIdentifier:@"ShowPostDetail" sender:indexPath];
+}
+
+#pragma mark - Gesture Recognizers
+
+- (void)imageViewTapped:(UITapGestureRecognizer *)tapGestureRecognizer {
+    NSInteger row = tapGestureRecognizer.view.tag;
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+    
+    [self performSegueWithIdentifier:@"ShowProfileDetail" sender:indexPath];
 }
 
 #pragma mark - IBActions
@@ -171,6 +202,17 @@
         
         FIRDataSnapshot *snapshot = [self.dataSource objectAtIndex:path.row];
         postDetailTableVC.postKey = snapshot.key;
+    }
+    else if ([segue.identifier isEqualToString:@"ShowProfileDetail"]) {
+        ProfileViewController *profileVC = segue.destinationViewController;
+        NSIndexPath *path = sender;
+        
+        FIRDataSnapshot *snapshot = [self.dataSource objectAtIndex:path.row];
+        
+        NSDictionary *post = snapshot.value;
+        NSString *userID = post[@"uid"];
+        
+        profileVC.userID = userID;
     }
 }
 

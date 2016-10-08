@@ -22,6 +22,9 @@
 		889A9D2D1D8871B70049052A /* PostDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 889A9D2C1D8871B70049052A /* PostDetailTableViewController.m */; };
 		889A9D301D88876C0049052A /* PostDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 889A9D2F1D88876C0049052A /* PostDetailTableViewCell.m */; };
 		88BC12BA1D8C772E00351560 /* CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BC12B91D8C772E00351560 /* CommentTableViewCell.m */; };
+		88BC12BF1D9DC77A00351560 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BC12BE1D9DC77A00351560 /* ProfileViewController.m */; };
+		88BC12C21D9DDB4B00351560 /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BC12C11D9DDB4B00351560 /* EditProfileViewController.m */; };
+		88BC12C51DA31ECF00351560 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BC12C41DA31ECF00351560 /* TabBarController.m */; };
 		C7C08F32CB1A0A07A676DF4C /* Pods_BloQuery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17FD03A98D93372DBD86A7DC /* Pods_BloQuery.framework */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +59,12 @@
 		889A9D2F1D88876C0049052A /* PostDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostDetailTableViewCell.m; sourceTree = "<group>"; };
 		88BC12B81D8C772E00351560 /* CommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentTableViewCell.h; sourceTree = "<group>"; };
 		88BC12B91D8C772E00351560 /* CommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentTableViewCell.m; sourceTree = "<group>"; };
+		88BC12BD1D9DC77A00351560 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		88BC12BE1D9DC77A00351560 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		88BC12C01D9DDB4B00351560 /* EditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
+		88BC12C11D9DDB4B00351560 /* EditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfileViewController.m; sourceTree = "<group>"; };
+		88BC12C31DA31ECF00351560 /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
+		88BC12C41DA31ECF00351560 /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +120,8 @@
 				889A9D101D6FA9170049052A /* GoogleService-Info.plist */,
 				889A9CEC1D6142040049052A /* AppDelegate.h */,
 				889A9CED1D6142040049052A /* AppDelegate.m */,
+				88BC12C31DA31ECF00351560 /* TabBarController.h */,
+				88BC12C41DA31ECF00351560 /* TabBarController.m */,
 				889A9D121D6FB8840049052A /* LoginViewController.h */,
 				889A9D131D6FB8840049052A /* LoginViewController.m */,
 				889A9D151D7259D00049052A /* PostTableViewController.h */,
@@ -129,6 +140,10 @@
 				889A9D2F1D88876C0049052A /* PostDetailTableViewCell.m */,
 				88BC12B81D8C772E00351560 /* CommentTableViewCell.h */,
 				88BC12B91D8C772E00351560 /* CommentTableViewCell.m */,
+				88BC12BD1D9DC77A00351560 /* ProfileViewController.h */,
+				88BC12BE1D9DC77A00351560 /* ProfileViewController.m */,
+				88BC12C01D9DDB4B00351560 /* EditProfileViewController.h */,
+				88BC12C11D9DDB4B00351560 /* EditProfileViewController.m */,
 				889A9CF21D6142040049052A /* Main.storyboard */,
 				889A9CF51D6142040049052A /* Assets.xcassets */,
 				889A9CF71D6142040049052A /* LaunchScreen.storyboard */,
@@ -276,9 +291,12 @@
 				889A9D211D8517490049052A /* PostDataSource.m in Sources */,
 				889A9D141D6FB8840049052A /* LoginViewController.m in Sources */,
 				88BC12BA1D8C772E00351560 /* CommentTableViewCell.m in Sources */,
+				88BC12C51DA31ECF00351560 /* TabBarController.m in Sources */,
 				889A9CEE1D6142040049052A /* AppDelegate.m in Sources */,
+				88BC12C21D9DDB4B00351560 /* EditProfileViewController.m in Sources */,
 				889A9CEB1D6142040049052A /* main.m in Sources */,
 				889A9D2A1D86742E0049052A /* PostTableViewCell.m in Sources */,
+				88BC12BF1D9DC77A00351560 /* ProfileViewController.m in Sources */,
 				889A9D2D1D8871B70049052A /* PostDetailTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

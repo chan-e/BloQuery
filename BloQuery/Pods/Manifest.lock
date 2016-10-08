@@ -1,4 +1,19 @@
 PODS:
+  - AFNetworking (3.1.0):
+    - AFNetworking/NSURLSession (= 3.1.0)
+    - AFNetworking/Reachability (= 3.1.0)
+    - AFNetworking/Security (= 3.1.0)
+    - AFNetworking/Serialization (= 3.1.0)
+    - AFNetworking/UIKit (= 3.1.0)
+  - AFNetworking/NSURLSession (3.1.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.1.0)
+  - AFNetworking/Security (3.1.0)
+  - AFNetworking/Serialization (3.1.0)
+  - AFNetworking/UIKit (3.1.0):
+    - AFNetworking/NSURLSession
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
     - Bolts/Tasks (= 1.8.4)
@@ -19,6 +34,9 @@ PODS:
   - Firebase/Database (3.5.2):
     - Firebase/Analytics
     - FirebaseDatabase (= 3.0.2)
+  - Firebase/Storage (3.5.2):
+    - Firebase/Analytics
+    - FirebaseStorage (= 1.0.3)
   - FirebaseAnalytics (3.3.1):
     - FirebaseInstanceID (~> 1.0)
     - GoogleInterchangeUtilities (~> 1.2)
@@ -32,6 +50,9 @@ PODS:
   - FirebaseDatabase (3.0.2):
     - FirebaseAnalytics (~> 3.2)
   - FirebaseInstanceID (1.0.8)
+  - FirebaseStorage (1.0.3):
+    - FirebaseAnalytics (~> 3.3)
+    - GoogleNetworkingUtilities (~> 1.2)
   - FirebaseUI (0.4.0):
     - FirebaseUI/All (= 0.4.0)
   - FirebaseUI/All (0.4.0):
@@ -75,13 +96,16 @@ PODS:
   - SDCAlertView (5.1.1)
 
 DEPENDENCIES:
+  - AFNetworking (~> 3.0)
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
+  - Firebase/Storage
   - FirebaseUI (~> 0.4)
   - SDCAlertView (~> 5.1)
 
 SPEC CHECKSUMS:
+  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   FBSDKCoreKit: 6680cbd33a4243d80700f182d0af36b3fa7f3118
   FBSDKLoginKit: 96d9b70b5784490f02ab86119e542a1f182017a8
@@ -90,6 +114,7 @@ SPEC CHECKSUMS:
   FirebaseAuth: 26fd291c3b552fc9658420b867520d5ae080421c
   FirebaseDatabase: 59bea2e7dfd81b3b8b2f8e396caf1a52c2ced6f7
   FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
+  FirebaseStorage: 3992817bf405f5c1a4f8349678d22724cd0ef509
   FirebaseUI: 691e0f500c762a4c8b5b6ed93c011e871ecd8aad
   GoogleAppUtilities: f1730f91f67767b453c289577040dd3f425ffdc7
   GoogleAuthUtilities: d7a19615cd7627688afcf181737f1011ee8b5a23
@@ -101,6 +126,6 @@ SPEC CHECKSUMS:
   GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
   SDCAlertView: 90ea78aee0ce1cef883e1127861bd076711837f7
 
-PODFILE CHECKSUM: 088d30be61b9d7b16357a40d66351a030be3d1ef
+PODFILE CHECKSUM: 55c72f12e0478aef1dae4b7621c41535a6bff6ba
 
 COCOAPODS: 1.0.0

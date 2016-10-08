@@ -11,7 +11,7 @@
 
 @interface LoginViewController () <UITextFieldDelegate>
 
-@property (strong, nonatomic) FIRDatabaseReference *databaseRef;
+@property (strong, nonatomic) FIRDatabaseReference *ref;
 
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
@@ -26,7 +26,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.databaseRef = [[FIRDatabase database] reference];
+    self.ref = [[FIRDatabase database] reference];
     
     self.emailTextField.delegate = self;
     self.passwordTextField.delegate = self;
@@ -132,7 +132,7 @@
                                                                     return;
                                                                 }
                                                                 
-                                                                [[[self.databaseRef child:@"users"] child:user.uid] setValue:@{@"username": usernameTextField.text}];
+                                                                [[[self.ref child:@"users"] child:user.uid] setValue:@{@"username": usernameTextField.text, @"description": @"", @"profileImageURL": @""}];
                                                                 
                                                                 [self performSegueWithIdentifier:@"ShowPosts" sender:nil];
                                                             }];
