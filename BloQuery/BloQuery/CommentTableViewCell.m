@@ -35,18 +35,18 @@
             votes = [[NSMutableDictionary alloc] initWithCapacity:1];
         }
         
-        NSString *uid = [FIRAuth auth].currentUser.uid;
+        NSString *userID = [FIRAuth auth].currentUser.uid;
         
         int voteCount = [comment[@"voteCount"] intValue];
         
-        if ([votes objectForKey:uid]) {
+        if ([votes objectForKey:userID]) {
             // "Downvote" the comment and remove self from votes
             voteCount--;
-            [votes removeObjectForKey:uid];
+            [votes removeObjectForKey:userID];
         } else {
             // Upvote the comment and add self to votes
             voteCount++;
-            votes[uid] = @YES;
+            votes[userID] = @YES;
         }
         
         comment[@"votes"] = votes;

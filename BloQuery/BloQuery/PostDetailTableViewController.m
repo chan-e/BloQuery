@@ -7,11 +7,14 @@
 //
 
 #import "PostDetailTableViewController.h"
+#import "ProfileViewController.h"
 #import "Post.h"
 #import "PostDetailTableViewCell.h"
 #import "CommentTableViewCell.h"
-@import SDCAlertView;
+
 @import Firebase;
+@import SDCAlertView;
+#import "UIImageView+AFNetworking.h"
 
 @interface PostDetailTableViewController ()
 
@@ -103,13 +106,37 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewTapped:)];
+    
     if (indexPath.section == 0) {
         // The post or question section
         PostDetailTableViewCell *postCell = (PostDetailTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"postDetailTableViewCell" forIndexPath:indexPath];
         
         // Configure the post cell...
-//        postCell.userImageView.image = [UIImage imageNamed:@""];
         postCell.postTextLabel.text = self.post.text;
+        
+        // Make the image view tappable
+        postCell.userImageView.tag = -1;
+        
+        postCell.userImageView.userInteractionEnabled = YES;
+        
+        [postCell.userImageView addGestureRecognizer:tapGestureRecognizer];
+        
+        // The Post object might not be set yet
+        // because of the asynchronous read from the database
+        if (self.post.uid.length) {
+            FIRDatabaseReference *usersRef = [[self.ref child:@"users"] child:self.post.uid];
+            
+            [usersRef observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
+                NSString *profileImageURL = snapshot.value[@"profileImageURL"];
+                
+                if (profileImageURL.length) {
+                    // Download the profile image
+                    NSURL *url = [NSURL URLWithString:profileImageURL];
+                    [postCell.userImageView setImageWithURL:url];
+                }
+            }];
+        }
         
         return postCell;
     } else {
@@ -121,8 +148,6 @@
         NSDictionary *comment = snapshot.value;
         
         // Configure the comment cell...
-//        commentCell.userImageView.image = [UIImage imageNamed:@""];
-        
         commentCell.usernameLabel.text = comment[@"username"];
         commentCell.commentTextLabel.text = comment[@"text"];
         commentCell.voteCountLabel.text = [[comment[@"voteCount"] stringValue] stringByAppendingString:@" votes"];
@@ -133,6 +158,26 @@
         [commentCell.upvoteButton setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
         
         commentCell.commentRef = snapshot.ref;
+        
+        // Make the image view tappable
+        commentCell.userImageView.tag = indexPath.row;
+        
+        commentCell.userImageView.userInteractionEnabled = YES;
+        
+        [commentCell.userImageView addGestureRecognizer:tapGestureRecognizer];
+        
+        
+        FIRDatabaseReference *usersRef = [[self.ref child:@"users"] child:comment[@"uid"]];
+        
+        [usersRef observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
+            NSString *profileImageURL = snapshot.value[@"profileImageURL"];
+            
+            if (profileImageURL.length) {
+                // Download the profile image
+                NSURL *url = [NSURL URLWithString:profileImageURL];
+                [commentCell.userImageView setImageWithURL:url];
+            }
+        }];
         
         return commentCell;
     }
@@ -171,6 +216,24 @@
     return YES;
 }
 */
+
+#pragma mark - Gesture Recognizers
+
+- (void)imageViewTapped:(UITapGestureRecognizer *)tapGestureRecognizer {
+    NSInteger row = tapGestureRecognizer.view.tag;
+    
+    NSIndexPath *indexPath = nil;
+    
+    if (row == -1) {
+        // The only image view in the post or question section was tapped
+        indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    } else {
+        // One of the image views in the comment or answer section was tapped
+        indexPath = [NSIndexPath indexPathForRow:row inSection:1];
+    }
+    
+    [self performSegueWithIdentifier:@"ShowProfileDetail" sender:indexPath];
+}
 
 #pragma mark - IBActions
 
@@ -277,14 +340,34 @@
     }];
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if ([segue.identifier isEqualToString:@"ShowProfileDetail"]) {
+        ProfileViewController *profileVC = segue.destinationViewController;
+        
+        NSIndexPath *path = sender;
+        
+        NSString *userID = @"";
+        
+        if (path.section == 0) {
+            // The post or question section
+            userID = self.post.uid;
+        } else {
+            // The comment or answer section
+            FIRDataSnapshot *snapshot = self.comments[path.row];
+            
+            NSDictionary *comment = snapshot.value;
+            
+            userID = comment[@"uid"];
+        }
+        
+        profileVC.userID = userID;
+    }
 }
-*/
 
 @end

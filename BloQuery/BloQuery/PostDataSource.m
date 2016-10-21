@@ -7,6 +7,7 @@
 //
 
 #import "PostDataSource.h"
+#import "PostTableViewCell.h"
 
 @implementation PostDataSource
 
@@ -20,6 +21,14 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    PostTableViewCell *cell = (PostTableViewCell *)[super tableView:tableView cellForRowAtIndexPath:indexPath];
+    
+    cell.userImageView.tag = indexPath.row;
+    
+    return cell;
 }
 
 @end

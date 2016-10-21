@@ -1,4 +1,5 @@
 # Uncomment this line to define a global platform for your project
+source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '9.0'
 
 target 'BloQuery' do
@@ -9,7 +10,9 @@ target 'BloQuery' do
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
+  pod 'Firebase/Storage'
   pod 'FirebaseUI', '~> 0.4'
   pod 'SDCAlertView', '~> 5.1'
+  pod 'AFNetworking', '~> 3.0'
 
 end
